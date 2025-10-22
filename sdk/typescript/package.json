@@ -19,12 +19,19 @@
   "engines": {
     "node": ">=18"
   },
+  "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
   "files": [
@@ -35,6 +42,9 @@
     "clean": "rm -rf dist",
     "build": "tsup",
     "build:watch": "tsup --watch",
+    "test:modules": "npm run test:esm && npm run test:cjs",
+    "test:esm": "node test-esm.mjs",
+    "test:cjs": "node test-cjs.cjs",
     "lint": "pnpm eslint \"src/**/*.ts\" \"tests/**/*.ts\"",
     "lint:fix": "pnpm eslint --fix \"src/**/*.ts\" \"tests/**/*.ts\"",
     "test": "jest",

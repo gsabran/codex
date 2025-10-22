@@ -36,6 +36,9 @@ jobs:
       - name: Build SDK packages
         run: pnpm -r --filter ./sdk/typescript run build
 
+      - name: Test module formats (ESM/CJS)
+        run: pnpm -r --filter ./sdk/typescript run test:modules
+
       - name: Lint SDK packages
         run: pnpm -r --filter ./sdk/typescript run lint
 
